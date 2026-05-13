@@ -1,0 +1,135 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 6%;
+  background: rgba(241, 240, 228, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(151, 149, 112, 0.18);
+  transition: background var(--tr);
+}
+
+body.dark .navbar {
+  background: rgba(26, 26, 46, 0.88);
+}
+
+.navbar__logo {
+  font-family: 'Alex Brush', cursive;
+  font-size: 2.1rem;
+  color: var(--accent);
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.navbar__links a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--muted);
+  position: relative;
+  transition: color var(--tr);
+}
+
+.navbar__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width var(--tr);
+}
+
+.navbar__links a:hover,
+.navbar__links a.active {
+  color: var(--accent);
+}
+
+.navbar__links a:hover::after,
+.navbar__links a.active::after {
+  width: 100%;
+}
+
+.navbar__mode-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--muted);
+  transition: color var(--tr), transform var(--tr);
+  padding: 4px;
+}
+
+.navbar__mode-btn:hover {
+  color: var(--accent);
+  transform: rotate(22deg);
+}
+
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--tr);
+}
+
+.navbar__hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.navbar__hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__links {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background: var(--bg2);
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+    box-shadow: -4px 0 30px rgba(0, 0, 0, 0.12);
+    transition: right var(--tr);
+    z-index: 150;
+  }
+
+  .navbar__links.open {
+    right: 0;
+  }
+}

@@ -1,0 +1,22 @@
+/* ── CSS Custom Properties ── */
+:root {
+  --bg: #f1f0e4;
+  --bg2: #ffffff;
+  --accent: #97956f;
+  --accent-lt: rgba(151, 149, 112, 0.13);
+  --text: #242329;
+  --muted: #6d6a7c;
+  --radius: 16px;
+  --tr: 0.3s ease;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+body.dark {
+  --bg: #1a1a2e;
+  --bg2: #16213e;
+  --accent: #b8b58a;
+  --accent-lt: rgba(184, 181, 138, 0.13);
+  --text: #e8e6d9;
+  --muted: #a09db5;
+  --shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+}

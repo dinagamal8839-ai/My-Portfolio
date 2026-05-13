@@ -1,0 +1,32 @@
+.footer {
+  background: var(--bg);
+  padding: 2rem 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  border-top: 1px solid rgba(151, 149, 112, 0.18);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.footer span {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.footer__links {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer__links a {
+  color: var(--muted);
+  font-size: 1.1rem;
+  transition: color var(--tr);
+}
+
+.footer__links a:hover {
+  color: var(--accent);
+}
