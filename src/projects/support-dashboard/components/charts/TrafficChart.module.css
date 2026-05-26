@@ -1,0 +1,24 @@
+.wrap {
+  width: 100%;
+  min-height: 220px;
+  height: 280px;
+}
+
+.tooltip {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+.tooltip strong {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--text);
+}
+
+.tooltip span {
+  color: var(--muted);
+}

@@ -1,8 +1,11 @@
 import { useEffect, useRef } from 'react';
-import services from '../data/services';
+import { SERVICES_CONFIG } from '../data/servicesConfig';
+import { useLanguage } from '../context/LanguageContext';
+import SectionHeading from './SectionHeading';
 import '../styles/Services.css';
 
 export default function Services() {
+  const { t } = useLanguage();
   const cardRefs = useRef([]);
 
   useEffect(() => {
@@ -23,11 +26,15 @@ export default function Services() {
 
   return (
     <section className="section services-section" id="services">
-      <p className="section-tag center">What I offer</p>
-      <h2 className="section-title center">My <span>Services</span></h2>
+      <SectionHeading
+        tag="services.tag"
+        title="services.title"
+        titleHighlight="services.titleHighlight"
+        center
+      />
 
       <div className="services__grid">
-        {services.map((s, i) => (
+        {SERVICES_CONFIG.map((s, i) => (
           <div
             className="service-card"
             key={s.id}
@@ -36,8 +43,8 @@ export default function Services() {
             <div className="service-card__icon">
               <i className={s.icon} />
             </div>
-            <h4>{s.title}</h4>
-            <p>{s.description}</p>
+            <h4>{t(`services.items.${s.key}.title`)}</h4>
+            <p>{t(`services.items.${s.key}.description`)}</p>
           </div>
         ))}
       </div>

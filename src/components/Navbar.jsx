@@ -1,20 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import '../styles/Navbar.css';
 
-const NAV_ITEMS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+const NAV_KEYS = [
+  { key: 'nav.home', href: '#home', id: 'home' },
+  { key: 'nav.about', href: '#about', id: 'about' },
+  { key: 'nav.skills', href: '#skills', id: 'skills' },
+  { key: 'nav.services', href: '#services', id: 'services' },
+  { key: 'nav.projects', href: '#projects', id: 'projects' },
+  { key: 'nav.contact', href: '#contact', id: 'contact' },
 ];
 
 export default function Navbar({ dark, onToggleDark }) {
+  const { t, lang, toggleLanguage } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Highlight active nav link on scroll
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('section[id]');
@@ -29,42 +30,65 @@ export default function Navbar({ dark, onToggleDark }) {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+  const langLabel = lang === 'en' ? t('nav.switchToArabic') : t('nav.switchToEnglish');
 
   return (
     <nav className="navbar" aria-label="Main navigation">
       <div className="navbar__logo">Dina Abdelnasser</div>
 
       <ul className={`navbar__links${menuOpen ? ' open' : ''}`}>
-        {NAV_ITEMS.map(({ label, href }) => (
-          <li key={label}>
+        {NAV_KEYS.map(({ key, href, id }) => (
+          <li key={id}>
             <a
               href={href}
-              className={activeSection === href.slice(1) ? 'active' : ''}
+              className={activeSection === id ? 'active' : ''}
               onClick={closeMenu}
             >
-              {label}
+              {t(key)}
             </a>
           </li>
         ))}
         <li>
           <button
+            type="button"
+            className="navbar__lang-btn"
+            onClick={toggleLanguage}
+            aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+            lang={lang === 'en' ? 'ar' : 'en'}
+          >
+            {langLabel}
+          </button>
+        </li>
+        <li>
+          <button
             className="navbar__mode-btn"
             onClick={onToggleDark}
-            aria-label="Toggle dark mode"
+            aria-label={t('nav.toggleDark')}
           >
             <i className={dark ? 'fas fa-sun' : 'fas fa-moon'} />
           </button>
         </li>
       </ul>
 
-      <button
-        className={`navbar__hamburger${menuOpen ? ' open' : ''}`}
-        onClick={() => setMenuOpen((o) => !o)}
-        aria-label="Toggle menu"
-        aria-expanded={menuOpen}
-      >
-        <span /><span /><span />
-      </button>
+      <div className="navbar__actions-mobile">
+        <button
+          type="button"
+          className="navbar__lang-btn navbar__lang-btn--compact"
+          onClick={toggleLanguage}
+          aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
+          lang={lang === 'en' ? 'ar' : 'en'}
+        >
+          {langLabel}
+        </button>
+        <button
+          className={`navbar__hamburger${menuOpen ? ' open' : ''}`}
+          onClick={() => setMenuOpen((o) => !o)}
+          aria-label={t('nav.toggleMenu')}
+          aria-expanded={menuOpen}
+        >
+          <span /><span /><span />
+        </button>
+      </div>
     </nav>
   );
 }

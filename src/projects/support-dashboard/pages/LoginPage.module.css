@@ -1,0 +1,240 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: var(--bg);
+  background-image:
+    radial-gradient(ellipse 100% 80% at 50% -30%, rgba(16, 185, 129, 0.14), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 20%, rgba(52, 211, 153, 0.08), transparent 50%);
+}
+
+.boot {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent-bright);
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 1.75rem 1.85rem 1.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(165deg, var(--surface) 0%, var(--surface-elevated) 100%);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent-bright);
+}
+
+.storeName {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  margin: 0.1rem 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.heading {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.lead {
+  margin: 0 0 1.25rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.error {
+  margin: 0;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8125rem;
+  color: #fecaca;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.25);
+  border-radius: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--text);
+  font-size: 0.9375rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus {
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.passwordWrap {
+  position: relative;
+}
+
+.passwordWrap .input {
+  padding-right: 2.75rem;
+}
+
+.togglePw {
+  position: absolute;
+  right: 0.35rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.togglePw:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.remember input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+}
+
+.submit {
+  margin-top: 0.25rem;
+  padding: 0.65rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #042f2e;
+  background: linear-gradient(135deg, var(--accent-bright), var(--accent));
+  cursor: pointer;
+  transition: filter 0.18s ease, transform 0.18s ease;
+}
+
+.submit:hover {
+  filter: brightness(1.06);
+}
+
+.submit:active {
+  transform: scale(0.99);
+}
+
+.demo {
+  margin: 1.25rem 0 0;
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.demo code {
+  font-size: 0.85em;
+  padding: 0.1em 0.3em;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.footer {
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+}
+
+.link {
+  color: var(--accent-bright);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.muted {
+  color: var(--muted);
+}

@@ -1,0 +1,131 @@
+.page {
+  max-width: 560px;
+}
+
+.heading {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+}
+
+.lead {
+  margin: 0 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.section {
+  margin-bottom: 1.75rem;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, var(--surface) 0%, var(--surface-elevated) 100%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.sectionTitle {
+  margin: 0 0 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.row:first-child {
+  padding-top: 0;
+}
+
+.rowTitle {
+  margin: 0;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+
+.rowHint {
+  margin: 0.15rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.switch {
+  position: relative;
+  width: 44px;
+  height: 26px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 999px;
+  background: #334155;
+  transition: background 0.2s;
+}
+
+.switchOn {
+  background: var(--accent);
+}
+
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.2s;
+  pointer-events: none;
+}
+
+.switchOn .knob {
+  transform: translateX(18px);
+}
+
+.field {
+  margin-bottom: 0.75rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.9375rem;
+}
+
+.input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.note {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}

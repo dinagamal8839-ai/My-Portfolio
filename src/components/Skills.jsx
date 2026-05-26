@@ -1,8 +1,11 @@
 import { useEffect, useRef } from 'react';
 import skills from '../data/skills';
+import { useLanguage } from '../context/LanguageContext';
+import SectionHeading from './SectionHeading';
 import '../styles/Skills.css';
 
 export default function Skills() {
+  const { t } = useLanguage();
   const cardRefs = useRef([]);
 
   useEffect(() => {
@@ -12,9 +15,8 @@ export default function Skills() {
           if (entry.isIntersecting) {
             setTimeout(() => {
               entry.target.classList.add('visible');
-              // Animate the fill bar
               const fill = entry.target.querySelector('.skill-fill');
-              if (fill) fill.style.width = fill.dataset.w + '%';
+              if (fill) fill.style.width = `${fill.dataset.w}%`;
             }, i * 100);
             observer.unobserve(entry.target);
           }
@@ -27,10 +29,17 @@ export default function Skills() {
     return () => observer.disconnect();
   }, []);
 
+  const skillName = (skill) =>
+    skill.id === 6 ? t('skills.items.responsiveDesign') : skill.name;
+
   return (
     <section className="section skills-section" id="skills">
-      <p className="section-tag center">What I know</p>
-      <h2 className="section-title center">My <span>Skills</span></h2>
+      <SectionHeading
+        tag="skills.tag"
+        title="skills.title"
+        titleHighlight="skills.titleHighlight"
+        center
+      />
 
       <div className="skills__grid">
         {skills.map((skill, i) => (
@@ -40,7 +49,7 @@ export default function Skills() {
             ref={(el) => (cardRefs.current[i] = el)}
           >
             <i className={skill.icon} />
-            <span>{skill.name}</span>
+            <span>{skillName(skill)}</span>
             <div className="skill-bar">
               <div className="skill-fill" data-w={skill.level} />
             </div>

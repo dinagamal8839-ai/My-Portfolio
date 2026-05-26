@@ -1,26 +1,34 @@
-import useDarkMode from './hooks/useDarkMode';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Services from './components/Services';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { LanguageProvider } from './context/LanguageContext';
+import PortfolioPage from './pages/PortfolioPage';
+import AmazonCloneApp from './projects/AmazonCloneApp';
+import ChatbotApp from './projects/ChatbotApp';
+import SupportDashboardApp from './projects/SupportDashboardApp';
+import { ROUTES } from './routes';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
+
+  return null;
+}
 
 export default function App() {
-  const { dark, toggle } = useDarkMode();
-
   return (
-    <>
-      <Navbar dark={dark} onToggleDark={toggle} />
-      <Hero />
-      <About />
-      <Skills />
-      <Services />
-      <Projects />
-      <Contact />
-      <Footer />
-    </>
+    <LanguageProvider>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route path={ROUTES.portfolio} element={<PortfolioPage />} />
+        <Route path={`${ROUTES.amazonClone}/*`} element={<AmazonCloneApp />} />
+        <Route path={`${ROUTES.chatbot}/*`} element={<ChatbotApp />} />
+        <Route path={`${ROUTES.supportDashboard}/*`} element={<SupportDashboardApp />} />
+      </Routes>
+    </BrowserRouter>
+    </LanguageProvider>
   );
 }

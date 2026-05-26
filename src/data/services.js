@@ -14,7 +14,7 @@ const services = [
   {
     id: 3,
     icon: 'fab fa-react',
-    title: 'React Apps',
+    title: 'React Websites',
     description: 'Developing interactive single-page applications with React and modern tooling.',
   },
   {

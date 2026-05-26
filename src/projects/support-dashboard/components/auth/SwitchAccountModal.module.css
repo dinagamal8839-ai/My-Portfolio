@@ -1,0 +1,164 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: linear-gradient(165deg, var(--surface) 0%, var(--surface-elevated) 100%);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  animation: slideUp 0.22s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.close:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.lead {
+  margin: 0;
+  padding: 0.75rem 1.15rem 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0.35rem 0.65rem 0.85rem;
+  max-height: min(52vh, 360px);
+  overflow-y: auto;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.35rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.rowActive {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent), #0d9488);
+  color: #fff;
+}
+
+.meta {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.email {
+  font-size: 0.78rem;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role {
+  font-size: 0.7rem;
+  color: var(--accent-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.check {
+  color: var(--accent-bright);
+  flex-shrink: 0;
+}

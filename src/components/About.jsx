@@ -1,41 +1,39 @@
 import aboutImg from '../assets/about.jpeg';
+import { useLanguage } from '../context/LanguageContext';
+import SectionHeading from './SectionHeading';
 import '../styles/About.css';
 
-const STATS = [
-  { value: '5+', label: 'Projects' },
-  { value: '3+', label: 'Technologies' },
-  { value: '100%', label: 'Dedication' },
-];
-
 export default function About() {
+  const { t } = useLanguage();
+
+  const stats = [
+    { value: '20+', label: t('about.stats.projects') },
+    { value: '3+', label: t('about.stats.technologies') },
+    { value: '100%', label: t('about.stats.dedication') },
+  ];
+
   return (
     <section className="section about-section" id="about">
       <div className="about__inner">
-        {/* Image */}
         <div className="about__img-wrap">
-          <img src={aboutImg} alt="About Dina" className="about__img" />
+          <img src={aboutImg} alt={t('about.imageAlt')} className="about__img" />
           <div className="about__badge">
-            <strong>1+</strong>
-            <small>Year of<br />Experience</small>
+            <strong>{t('about.badgeYears')}</strong>
+            <small style={{ whiteSpace: 'pre-line' }}>{t('about.badgeLabel')}</small>
           </div>
         </div>
 
-        {/* Content */}
         <div className="about__content">
-          <p className="section-tag">Get to know me</p>
-          <h2 className="section-title">About <span>Me</span></h2>
-          <p>
-            I&apos;m Dina Abdelnasser, a passionate Front-End Developer based in Egypt.
-            I love building beautiful, accessible, and performant web interfaces that
-            make people&apos;s lives easier.
-          </p>
-          <p>
-            When I&apos;m not coding, I&apos;m exploring new design trends, learning new
-            technologies, and working on personal projects that challenge me to grow.
-          </p>
+          <SectionHeading
+            tag="about.tag"
+            title="about.title"
+            titleHighlight="about.titleHighlight"
+          />
+          <p>{t('about.p1')}</p>
+          <p>{t('about.p2')}</p>
 
           <div className="about__stats">
-            {STATS.map(({ value, label }) => (
+            {stats.map(({ value, label }) => (
               <div className="about__stat" key={label}>
                 <strong>{value}</strong>
                 <span>{label}</span>
@@ -44,7 +42,7 @@ export default function About() {
           </div>
 
           <a href="#contact" className="btn btn-primary" style={{ marginTop: '1.8rem' }}>
-            <i className="fas fa-handshake" /> Hire Me
+            <i className="fas fa-handshake" /> {t('about.hireBtn')}
           </a>
         </div>
       </div>

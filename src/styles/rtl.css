@@ -1,0 +1,104 @@
+/* RTL layout — portfolio only; demo apps keep their own direction */
+
+html[dir='rtl'] body {
+  font-family: 'Noto Sans Arabic', 'Poppins', sans-serif;
+}
+
+html[dir='rtl'] .navbar__links a::after {
+  left: auto;
+  right: 0;
+}
+
+html[dir='rtl'] .hero__container {
+  flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .hero__content {
+  text-align: right;
+}
+
+html[dir='rtl'] .hero__btns {
+  justify-content: flex-start;
+}
+
+html[dir='rtl'] .about__inner {
+  flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .about__content {
+  text-align: right;
+}
+
+html[dir='rtl'] .about__badge {
+  right: auto;
+  left: -20px;
+}
+
+html[dir='rtl'] .contact__item {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+html[dir='rtl'] .contact__item div {
+  align-items: flex-end;
+}
+
+html[dir='rtl'] .footer {
+  flex-direction: row-reverse;
+}
+
+html[dir='rtl'] .social-sidebar {
+  left: auto;
+  right: 1.8%;
+}
+
+html[dir='rtl'] .project-demo-app__back {
+  left: auto;
+  right: 1rem;
+}
+
+html[dir='rtl'] .section-tag.center,
+html[dir='rtl'] .section-title.center {
+  text-align: center;
+}
+
+html[dir='rtl'] .project-card__cta i {
+  transform: scaleX(-1);
+}
+
+html[dir='rtl'] .project-card--clickable:hover .project-card__cta i {
+  transform: scaleX(-1) translateX(-3px);
+}
+
+@media (max-width: 768px) {
+  html[dir='rtl'] .navbar__links {
+    right: auto;
+    left: -100%;
+    box-shadow: 4px 0 30px rgba(0, 0, 0, 0.12);
+  }
+
+  html[dir='rtl'] .navbar__links.open {
+    left: 0;
+    right: auto;
+  }
+
+  html[dir='rtl'] .hero__container {
+    flex-direction: column-reverse;
+  }
+
+  html[dir='rtl'] .hero__content {
+    text-align: center;
+  }
+
+  html[dir='rtl'] .hero__btns {
+    justify-content: center;
+  }
+
+  html[dir='rtl'] .about__inner {
+    flex-direction: column;
+  }
+
+  html[dir='rtl'] .about__content {
+    text-align: center;
+  }
+}

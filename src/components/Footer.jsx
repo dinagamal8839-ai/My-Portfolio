@@ -1,10 +1,13 @@
+import { useLanguage } from '../context/LanguageContext';
 import '../styles/Footer.css';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="footer">
       <p>
-        Designed &amp; Built by <span>Dina Abdelnasser</span> &copy; 2026
+        {t('footer.built')} <span>Dina Abdelnasser</span> {t('footer.copyright')}
       </p>
       <div className="footer__links">
         <a href="https://github.com/dinagamal8839-ai/My-Projects" target="_blank" rel="noopener noreferrer" aria-label="GitHub">

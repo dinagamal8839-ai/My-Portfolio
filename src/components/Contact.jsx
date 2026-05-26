@@ -1,15 +1,26 @@
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { openEmailCompose, CONTACT_EMAIL, DEFAULT_EMAIL_SUBJECT } from '../utils/mailto';
+import { SOCIAL_LINKS } from '../data/socialLinks';
+import { useLanguage } from '../context/LanguageContext';
+import useContactForm from '../hooks/useContactForm';
+import SectionHeading from './SectionHeading';
 import '../styles/Contact.css';
 
-const CONTACT_ITEMS = [
-  { icon: 'fas fa-envelope', label: 'Email', value: 'dinagamal7553@gmail.com', href: null },
-  { icon: 'fab fa-linkedin-in', label: 'LinkedIn', value: 'dina-gamal', href: 'https://www.linkedin.com/in/dina-gamal-63296b251/' },
-  { icon: 'fab fa-github', label: 'GitHub', value: 'dinagamal8839-ai', href: 'https://github.com/dinagamal8839-ai/My-Projects' },
-];
+const CONTACT_DISPLAY = {
+  github: 'dinagamal8839-ai',
+  linkedin: 'dina-gamal',
+  email: CONTACT_EMAIL,
+};
+
+const SOCIAL_LABEL_KEYS = {
+  github: 'contact.github',
+  linkedin: 'contact.linkedin',
+  email: 'contact.email',
+};
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [success, setSuccess] = useState(false);
+  const { t } = useLanguage();
+  const { form, honeypot, isSending, status, handleChange, handleSubmit } = useContactForm();
   const itemRefs = useRef([]);
 
   useEffect(() => {
@@ -28,75 +39,178 @@ export default function Contact() {
     return () => observer.disconnect();
   }, []);
 
-  const handleChange = (e) =>
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSuccess(true);
-    setForm({ name: '', email: '', subject: '', message: '' });
-    setTimeout(() => setSuccess(false), 4000);
+  const handleEmailClick = (event) => {
+    event.preventDefault();
+    openEmailCompose({ subject: DEFAULT_EMAIL_SUBJECT });
   };
 
   return (
     <section className="section contact-section" id="contact">
-      <p className="section-tag center">Get in touch</p>
-      <h2 className="section-title center">Contact <span>Me</span></h2>
+      <SectionHeading
+        tag="contact.tag"
+        title="contact.title"
+        titleHighlight="contact.titleHighlight"
+        center
+      />
 
       <div className="contact__inner">
-        {/* Info */}
         <div className="contact__info">
-          {CONTACT_ITEMS.map(({ icon, label, value, href }, i) => (
-            <div
-              className="contact__item"
-              key={label}
-              ref={(el) => (itemRefs.current[i] = el)}
-            >
-              <i className={icon} />
-              <div>
-                <strong>{label}</strong>
-                {href
-                  ? <a href={href} target="_blank" rel="noopener noreferrer">{value}</a>
-                  : <span>{value}</span>
-                }
+          {SOCIAL_LINKS.map(({ id, icon, href, external, isEmail }, i) => {
+            const value = CONTACT_DISPLAY[id];
+            const label = t(SOCIAL_LABEL_KEYS[id]);
+            const linkProps = external
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {};
+
+            return (
+              <div
+                className={`contact__item${isEmail ? ' contact__item--email' : ''}`}
+                key={id}
+                data-social-row={id}
+                ref={(el) => (itemRefs.current[i] = el)}
+              >
+                <a
+                  href={href}
+                  className="contact__icon-link"
+                  aria-label={`${label}: ${value}`}
+                  {...(isEmail
+                    ? {
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        onClick: handleEmailClick,
+                      }
+                    : linkProps)}
+                >
+                  <i className={icon} />
+                </a>
+                <div>
+                  {isEmail ? (
+                    <a
+                      href={href}
+                      className="contact__email-text"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={handleEmailClick}
+                    >
+                      <strong>{label}</strong>
+                      <span>{value}</span>
+                    </a>
+                  ) : (
+                    <>
+                      <strong>{label}</strong>
+                      <a href={href} {...linkProps}>{value}</a>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Form */}
         <form className="contact__form" onSubmit={handleSubmit} noValidate>
+          <input
+            type="text"
+            name="_gotcha"
+            className="contact__honeypot"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={honeypot}
+            onChange={handleChange}
+          />
+
           <div className="form-group">
+            <label className="contact__sr-only" htmlFor="contact-name">
+              {t('contact.namePlaceholder')}
+            </label>
             <input
-              type="text" name="name" placeholder="Your Name"
-              value={form.name} onChange={handleChange} required
+              id="contact-name"
+              type="text"
+              name="name"
+              placeholder={t('contact.namePlaceholder')}
+              value={form.name}
+              onChange={handleChange}
+              required
               autoComplete="name"
+              maxLength={200}
+              disabled={isSending}
             />
           </div>
+
           <div className="form-group">
+            <label className="contact__sr-only" htmlFor="contact-email">
+              {t('contact.emailPlaceholder')}
+            </label>
             <input
-              type="email" name="email" placeholder="Your Email"
-              value={form.email} onChange={handleChange} required
+              id="contact-email"
+              type="email"
+              name="email"
+              placeholder={t('contact.emailPlaceholder')}
+              value={form.email}
+              onChange={handleChange}
+              required
               autoComplete="email"
+              maxLength={320}
+              disabled={isSending}
             />
           </div>
+
           <div className="form-group">
+            <label className="contact__sr-only" htmlFor="contact-subject">
+              {t('contact.subjectPlaceholder')}
+            </label>
             <input
-              type="text" name="subject" placeholder="Subject"
-              value={form.subject} onChange={handleChange}
+              id="contact-subject"
+              type="text"
+              name="subject"
+              placeholder={t('contact.subjectPlaceholder')}
+              value={form.subject}
+              onChange={handleChange}
+              maxLength={200}
+              disabled={isSending}
             />
           </div>
+
           <div className="form-group">
+            <label className="contact__sr-only" htmlFor="contact-message">
+              {t('contact.messagePlaceholder')}
+            </label>
             <textarea
-              name="message" rows={5} placeholder="Your Message"
-              value={form.message} onChange={handleChange} required
+              id="contact-message"
+              name="message"
+              rows={5}
+              placeholder={t('contact.messagePlaceholder')}
+              value={form.message}
+              onChange={handleChange}
+              required
+              maxLength={5000}
+              disabled={isSending}
             />
           </div>
-          <button type="submit" className="btn btn-primary" style={{ justifyContent: 'center' }}>
-            <i className="fas fa-paper-plane" /> Send Message
+
+          <button
+            type="submit"
+            className="btn btn-primary contact__submit"
+            disabled={isSending}
+            aria-busy={isSending}
+          >
+            <i className="fas fa-paper-plane" aria-hidden />
+            {isSending ? t('contact.sending') : t('contact.send')}
           </button>
-          <p className={`form-success${success ? ' show' : ''}`}>
-            Message sent! I&apos;ll get back to you soon.
+
+          <p
+            className={`form-feedback form-success${status.type === 'success' ? ' show' : ''}`}
+            role="status"
+            aria-live="polite"
+          >
+            {status.type === 'success' ? status.message : ''}
+          </p>
+          <p
+            className={`form-feedback form-error${status.type === 'error' ? ' show' : ''}`}
+            role="alert"
+            aria-live="assertive"
+          >
+            {status.type === 'error' ? status.message : ''}
           </p>
         </form>
       </div>
