@@ -12,7 +12,7 @@ const NAV_KEYS = [
 ];
 
 export default function Navbar({ dark, onToggleDark }) {
-  const { t, lang, toggleLanguage } = useLanguage();
+  const { t } = useLanguage();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
@@ -30,7 +30,6 @@ export default function Navbar({ dark, onToggleDark }) {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
-  const langLabel = lang === 'en' ? t('nav.switchToArabic') : t('nav.switchToEnglish');
 
   return (
     <nav className="navbar" aria-label="Main navigation">
@@ -50,17 +49,6 @@ export default function Navbar({ dark, onToggleDark }) {
         ))}
         <li>
           <button
-            type="button"
-            className="navbar__lang-btn"
-            onClick={toggleLanguage}
-            aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
-            lang={lang === 'en' ? 'ar' : 'en'}
-          >
-            {langLabel}
-          </button>
-        </li>
-        <li>
-          <button
             className="navbar__mode-btn"
             onClick={onToggleDark}
             aria-label={t('nav.toggleDark')}
@@ -70,25 +58,14 @@ export default function Navbar({ dark, onToggleDark }) {
         </li>
       </ul>
 
-      <div className="navbar__actions-mobile">
-        <button
-          type="button"
-          className="navbar__lang-btn navbar__lang-btn--compact"
-          onClick={toggleLanguage}
-          aria-label={lang === 'en' ? 'Switch to Arabic' : 'Switch to English'}
-          lang={lang === 'en' ? 'ar' : 'en'}
-        >
-          {langLabel}
-        </button>
-        <button
-          className={`navbar__hamburger${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen((o) => !o)}
-          aria-label={t('nav.toggleMenu')}
-          aria-expanded={menuOpen}
-        >
-          <span /><span /><span />
-        </button>
-      </div>
+      <button
+        className={`navbar__hamburger${menuOpen ? ' open' : ''}`}
+        onClick={() => setMenuOpen((o) => !o)}
+        aria-label={t('nav.toggleMenu')}
+        aria-expanded={menuOpen}
+      >
+        <span /><span /><span />
+      </button>
     </nav>
   );
 }

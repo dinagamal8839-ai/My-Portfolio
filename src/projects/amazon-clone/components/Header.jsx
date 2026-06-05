@@ -1,23 +1,18 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/useCart';
-import { useLang } from '../context/useLang';
 import { amazonPaths } from '../paths';
 import t from '../i18n';
 
 function Header({ searchQuery, onSearchChange }) {
   const { totalItems } = useCart();
-  const { lang, toggleLang } = useLang();
   const [accountOpen, setAccountOpen] = useState(false);
-  const tx = t[lang];
-  const isRtl = lang === 'ar';
 
   return (
-    <header className='header' dir={isRtl ? 'rtl' : 'ltr'}>
+    <header className='header'>
 
-      {/* ── LEFT GROUP: logo + location ── */}
       <div className='header-left'>
-        <Link to={amazonPaths.home} className='logo'>{tx.logo}</Link>
+        <Link to={amazonPaths.home} className='logo'>{t.logo}</Link>
 
         <div className='header-location'>
           <svg width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'>
@@ -25,24 +20,23 @@ function Header({ searchQuery, onSearchChange }) {
             <circle cx='12' cy='10' r='3' />
           </svg>
           <div className='location-text'>
-            <span className='location-top'>{isRtl ? 'التوصيل إلى' : 'Delivering to'}</span>
-            <span className='location-bottom'>{isRtl ? 'القاهرة الجديدة' : 'New Cairo'}</span>
+            <span className='location-top'>Delivering to</span>
+            <span className='location-bottom'>New Cairo</span>
           </div>
         </div>
       </div>
 
-      {/* ── CENTRE: search bar ── */}
       <div className='search-wrapper'>
         {onSearchChange !== undefined ? (
           <input
             className='search-bar'
             type='text'
-            placeholder={tx.searchPlaceholder}
+            placeholder={t.searchPlaceholder}
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
           />
         ) : (
-          <div className='search-bar search-bar-disabled'>{tx.searchPlaceholder}</div>
+          <div className='search-bar search-bar-disabled'>{t.searchPlaceholder}</div>
         )}
         <button className='search-btn' aria-label='Search'>
           <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2.5' strokeLinecap='round' strokeLinejoin='round'>
@@ -52,32 +46,17 @@ function Header({ searchQuery, onSearchChange }) {
         </button>
       </div>
 
-      {/* ── RIGHT GROUP: lang + account + orders + cart ── */}
       <div className='header-right'>
 
-        {/* Language toggle — both flags */}
-        <button className='lang-toggle' onClick={toggleLang} aria-label='Switch language'>
-          <span className='lang-flag-pair'>
-            <span className={`lang-flag-item ${lang === 'en' ? 'lang-flag-active' : 'lang-flag-dim'}`}>🇺🇸</span>
-            <span className='lang-flag-sep'>/</span>
-            <span className={`lang-flag-item ${lang === 'ar' ? 'lang-flag-active' : 'lang-flag-dim'}`}>🇪🇬</span>
-          </span>
-          <span className='lang-code'>{lang === 'en' ? 'EN' : 'AR'}</span>
-          <svg width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round'>
-            <polyline points='6 9 12 15 18 9' />
-          </svg>
-        </button>
-
-        {/* Account & Lists */}
         <div className='header-account-wrapper'>
           <button
             className='header-account'
             onClick={() => setAccountOpen((p) => !p)}
             aria-label='Account menu'
           >
-            <span className='account-top'>{isRtl ? 'مرحباً، سجّل دخولك' : 'Hello, sign in'}</span>
+            <span className='account-top'>Hello, sign in</span>
             <span className='account-bottom'>
-              {isRtl ? 'الحساب والقوائم' : 'Account & Lists'}
+              Account & Lists
               <svg width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round' strokeLinejoin='round'>
                 <polyline points='6 9 12 15 18 9' />
               </svg>
@@ -87,27 +66,25 @@ function Header({ searchQuery, onSearchChange }) {
           {accountOpen && (
             <div className='account-dropdown'>
               <Link to={amazonPaths.you} className='account-dropdown-item' onClick={() => setAccountOpen(false)}>
-                👤 {isRtl ? 'حسابي' : 'Your Account'}
+                👤 Your Account
               </Link>
               <div className='account-dropdown-divider' />
               <button className='account-dropdown-item account-dropdown-btn' onClick={() => setAccountOpen(false)}>
-                🔄 {isRtl ? 'تبديل الحساب' : 'Switch Account'}
+                🔄 Switch Account
               </button>
               <button className='account-dropdown-item account-dropdown-btn' onClick={() => setAccountOpen(false)}>
-                🚪 {isRtl ? 'تسجيل الخروج' : 'Sign Out'}
+                🚪 Sign Out
               </button>
             </div>
           )}
         </div>
 
-        {/* Returns & Orders */}
         <Link to={amazonPaths.you} className='header-orders'>
-          <span className='account-top'>{isRtl ? 'العوائد' : 'Returns'}</span>
-          <span className='account-bottom'>{isRtl ? 'وطلباتي' : '& Orders'}</span>
+          <span className='account-top'>Returns</span>
+          <span className='account-bottom'>& Orders</span>
         </Link>
 
-        {/* Cart */}
-        <Link to={amazonPaths.checkout} className='header-cart' aria-label={tx.cart}>
+        <Link to={amazonPaths.checkout} className='header-cart' aria-label={t.cart}>
           <div className='cart-icon-wrapper'>
             <svg width='34' height='34' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='1.8' strokeLinecap='round' strokeLinejoin='round'>
               <circle cx='9' cy='21' r='1' />
@@ -116,7 +93,7 @@ function Header({ searchQuery, onSearchChange }) {
             </svg>
             {totalItems > 0 && <span className='cart-badge'>{totalItems}</span>}
           </div>
-          <span className='account-bottom'>{tx.cart}</span>
+          <span className='account-bottom'>{t.cart}</span>
         </Link>
 
       </div>

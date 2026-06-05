@@ -4,15 +4,12 @@ import { amazonPaths } from '../paths';
 import Header from '../components/Header';
 import CartItem from '../components/CartItem';
 import { useCart } from '../context/useCart';
-import { useLang } from '../context/useLang';
 import t from '../i18n';
 
 const SHIPPING = 10;
 
 function Checkout() {
   const { cart, subtotal, totalItems, placeOrder } = useCart();
-  const { lang } = useLang();
-  const tx = t[lang];
   const [orderPlaced, setOrderPlaced] = useState(false);
 
   const total = cart.length > 0 ? subtotal + SHIPPING : 0;
@@ -26,13 +23,13 @@ function Checkout() {
     return (
       <>
         <Header />
-        <div className='page-content' dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+        <div className='page-content'>
           <div className='order-success'>
             <div className='order-success-icon'>✅</div>
-            <h2>{tx.orderPlaced}</h2>
-            <p>{tx.thankYou}</p>
+            <h2>{t.orderPlaced}</h2>
+            <p>{t.thankYou}</p>
             <Link to={amazonPaths.home} className='continue-shopping-btn'>
-              {tx.browseProducts}
+              {t.browseProducts}
             </Link>
           </div>
         </div>
@@ -44,49 +41,49 @@ function Checkout() {
     <>
       <Header />
 
-      <div className='page-content' dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <div className='page-content'>
         {cart.length === 0 ? (
           <div className='empty-state'>
-            <p>🛒 {tx.emptyCart}</p>
+            <p>🛒 {t.emptyCart}</p>
             <Link to={amazonPaths.home} className='continue-shopping-btn'>
-              {tx.browseProducts}
+              {t.browseProducts}
             </Link>
           </div>
         ) : (
           <div className='checkout-page'>
             <div className='checkout-left'>
-              <h2>{tx.yourCart(totalItems)}</h2>
+              <h2>{t.yourCart(totalItems)}</h2>
               {cart.map((item) => (
                 <CartItem key={item.id} item={item} />
               ))}
             </div>
 
             <div className='checkout-right'>
-              <h2>{tx.orderSummary}</h2>
+              <h2>{t.orderSummary}</h2>
 
               <div className='summary-row'>
-                <span>{tx.subtotal}</span>
+                <span>{t.subtotal}</span>
                 <span>${subtotal.toFixed(2)}</span>
               </div>
 
               <div className='summary-row'>
-                <span>{tx.shipping}</span>
+                <span>{t.shipping}</span>
                 <span>${SHIPPING.toFixed(2)}</span>
               </div>
 
               <div className='summary-divider' />
 
               <div className='summary-row total'>
-                <span>{tx.total}</span>
+                <span>{t.total}</span>
                 <span>${total.toFixed(2)}</span>
               </div>
 
               <button className='place-order-btn' onClick={handlePlaceOrder}>
-                {tx.placeOrder}
+                {t.placeOrder}
               </button>
 
               <Link to={amazonPaths.home} className='back-link'>
-                {tx.continueShopping}
+                {t.continueShopping}
               </Link>
             </div>
           </div>

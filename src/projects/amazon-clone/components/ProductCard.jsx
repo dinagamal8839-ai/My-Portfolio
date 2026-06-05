@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/useCart';
-import { useLang } from '../context/useLang';
 import { amazonPaths } from '../paths';
 import t from '../i18n';
 
 function ProductCard({ product }) {
   const { addItem, cart } = useCart();
-  const { lang } = useLang();
-  const tx = t[lang];
   const [qty, setQty] = useState(1);
 
   const cartItem = cart.find((item) => item.id === product.id);
@@ -21,7 +18,7 @@ function ProductCard({ product }) {
   }
 
   return (
-    <div className='product-card' dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+    <div className='product-card'>
       <Link to={amazonPaths.product(product.id)} className='product-card-link'>
         <div className='product-image-wrapper'>
           <img src={product.image} alt={product.name} />
@@ -50,7 +47,7 @@ function ProductCard({ product }) {
           className={`add-to-cart-btn ${inCart ? 'in-cart' : ''}`}
           onClick={handleAdd}
         >
-          {inCart ? tx.inCart(cartItem.quantity) : tx.addToCart}
+          {inCart ? t.inCart(cartItem.quantity) : t.addToCart}
         </button>
       </div>
     </div>

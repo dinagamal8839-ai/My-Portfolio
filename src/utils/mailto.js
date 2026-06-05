@@ -1,7 +1,7 @@
 export const CONTACT_EMAIL = 'dinagamal8839@gmail.com';
 
-/** Default subject for Gmail compose, mailto links, and form submissions. */
-export const DEFAULT_EMAIL_SUBJECT = 'A project Request';
+/** Default subject for Gmail compose and mailto links. */
+export const DEFAULT_EMAIL_SUBJECT = 'Portfolio Inquiry';
 
 /** Gmail compose URL (opens in browser tab). */
 export function getGmailComposeUrl({ subject = DEFAULT_EMAIL_SUBJECT, body = '' } = {}) {

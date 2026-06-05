@@ -7,11 +7,11 @@ import '../styles/Hero.css';
 const SCROLL_HIDE_THRESHOLD = 50;
 
 export default function Hero() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
   const words = useMemo(() => {
     const typingWords = t('hero.typingWords');
     return Array.isArray(typingWords) ? typingWords : [];
-  }, [lang, t]);
+  }, [t]);
   const typedText = useTyping(words);
   const [scrollIndicatorHidden, setScrollIndicatorHidden] = useState(false);
 

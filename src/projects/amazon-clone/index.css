@@ -183,59 +183,6 @@
   flex: 0 0 auto;
 }
 
-/* Language toggle — both flags */
-.lang-toggle {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  background: transparent;
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: outline 0.15s;
-  white-space: nowrap;
-}
-
-.lang-toggle:hover {
-  outline: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.lang-flag-pair {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.lang-flag-item {
-  font-size: 1.1rem;
-  line-height: 1;
-  transition: opacity 0.15s;
-}
-
-.lang-flag-active {
-  opacity: 1;
-}
-
-.lang-flag-dim {
-  opacity: 0.4;
-}
-
-.lang-flag-sep {
-  font-size: 0.7rem;
-  color: rgba(255, 255, 255, 0.5);
-  margin: 0 1px;
-}
-
-.lang-code {
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
 /* Account */
 .header-account-wrapper {
   position: relative;

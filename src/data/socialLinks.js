@@ -1,6 +1,6 @@
 import { DEFAULT_EMAIL_SUBJECT, getGmailComposeUrl } from '../utils/mailto';
 
-/** Shared order: GitHub → LinkedIn → Email (matches contact info column). */
+/** Shared order: GitHub → LinkedIn → Email → WhatsApp */
 export const SOCIAL_LINKS = [
   {
     id: 'github',
@@ -23,5 +23,12 @@ export const SOCIAL_LINKS = [
     href: getGmailComposeUrl({ subject: DEFAULT_EMAIL_SUBJECT }),
     external: false,
     isEmail: true,
+  },
+  {
+    id: 'whatsapp',
+    icon: 'fab fa-whatsapp',
+    label: 'WhatsApp',
+    href: 'https://wa.me/201155562856',
+    external: true,
   },
 ];

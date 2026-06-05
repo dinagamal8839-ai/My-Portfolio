@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
 
 /**
  * Hides floating sidebar while the contact section (or its info column) is in view,
@@ -20,7 +19,6 @@ function shouldHideSidebar(target) {
 }
 
 export function useFloatingSocialSidebar() {
-  const { lang } = useLanguage();
   const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
@@ -68,7 +66,7 @@ export function useFloatingSocialSidebar() {
       window.removeEventListener('resize', onScrollOrResize);
       cancelAnimationFrame(rafId);
     };
-  }, [lang]);
+  }, []);
 
   return { hidden };
 }
